@@ -1,0 +1,174 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+p {
+  user-select: none;
+}
+
+/* Контейнер приложения */
+.wrapper {
+  max-width: 80vw;
+  background-color: #fefefe;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Заголовок */
+.title {
+  font-size: 2.5rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-task {
+  display: flex;
+  justify-content: center;
+}
+
+/* Поле для ввода */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"] {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+}
+
+/* Кнопка добавления */
+.add-btn {
+  padding: 10px 20px;
+  margin-left: 10px;
+  font-size: 1rem;
+}
+.add-btn,
+.filters button.active,
+.footer-btn:active {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Список задач */
+.task-list {
+  height: 60vh;
+  list-style-type: none;
+  padding: 0;
+  margin-top: 25px;
+  overflow-y: auto;
+}
+
+/* Элемент списка задач */
+.task-item {
+  min-width: 15vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.task-item input {
+  padding: 1.24em;
+  box-sizing: border-box;
+}
+
+.task-item label {
+  width: 100%;
+}
+
+/* Кнопка удаления задачи */
+.task-item button {
+  background-color: #dc3545;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+.task-item button:hover {
+  background-color: #a71d2a;
+}
+
+input[type="checkbox"]:checked + label {
+  text-decoration: line-through;
+}
+
+input[type="checkbox"]:checked + label button {
+  text-decoration: none;
+}
+
+.filters {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filters li {
+  list-style-type: none;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-btns {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2vh;
+}
+
+.form-row {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.small-btn-text {
+  font-size: 0.7em;
+  color: rgb(88, 82, 82);
+}
+
+.error-text {
+  position: absolute;
+  width: 20vw;
+  right: -20vw;
+  color: rgb(182, 12, 12);
+  font-size: 15px;
+}
