@@ -1,22 +1,28 @@
 import { useState, useRef } from 'react';
 import TaskEditMode from './TaskEditMode';
 import useClickOutside from '../../hooks/useClickOutside';
-import { useToDoContext } from '../../сontext/Context';
 import type { TaskType } from '../../types/todo.types';
+import { useAppDispatch } from '../../redux/hooks';
+import {
+  deleteTask,
+  editTaskTitle,
+  switchCompleteStatus,
+} from '../../redux/actions/tasksActions';
 
 type PropsType = {
   task: TaskType;
 };
 
 const Task = ({ task }: PropsType) => {
-  const { handleComplete, handleDelete, handleEdit } = useToDoContext();
   const [isEdit, setIsEdit] = useState(false);
   const [editText, setEditText] = useState(task.title);
+
+  const dispatch = useAppDispatch();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClickEdit = (
-    id: string | number,
+    id: string,
     newTitle: string,
     ref: React.RefObject<HTMLInputElement | null>,
   ) => {
@@ -28,9 +34,14 @@ const Task = ({ task }: PropsType) => {
       }
       return;
     }
-    handleEdit(id, newTitle);
+    dispatch(editTaskTitle({ id, newTitle }));
     setIsEdit((v) => !v);
   };
+
+  const handleClickComplete = (id: string) =>
+    dispatch(switchCompleteStatus({ id }));
+
+  const handleClickDelete = (id: string) => dispatch(deleteTask({ id }));
 
   const onCancelClick = (e: MouseEvent | TouchEvent | null) => {
     if (e?.target === document.querySelector('.edit-btn')) return;
@@ -46,7 +57,7 @@ const Task = ({ task }: PropsType) => {
       <input
         id={task.id}
         type="checkbox"
-        onChange={() => handleComplete(task.id)}
+        onChange={() => handleClickComplete(task.id)}
         checked={task.isCompleted}
       />
       <label
@@ -79,7 +90,7 @@ const Task = ({ task }: PropsType) => {
         ) : (
           <button onClick={() => setIsEdit(true)}>&#x270E;</button>
         )}
-        <button onClick={() => handleDelete(task.id)}>X</button>
+        <button onClick={() => handleClickDelete(task.id)}>X</button>
       </div>
     </li>
   );

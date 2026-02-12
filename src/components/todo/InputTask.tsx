@@ -1,21 +1,23 @@
-import { useRef, useState } from 'react';
-import { useToDoContext } from '../../сontext/Context';
+import { useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { change, clear } from '../../redux/actions/InputTextActions';
+import { addNewTask } from '../../redux/actions/tasksActions';
 
 const InputTask = () => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { handleAddTask } = useToDoContext();
-  const [inputText, setInputText] = useState('');
+  const inputText = useAppSelector((store) => store.inputText.value);
+  const dispatch = useAppDispatch();
 
   const handleClick = async () => {
     if (!inputText.trim()) {
       if (inputRef.current) {
         inputRef.current.style.backgroundColor = 'tomato';
       }
-      setInputText('');
+      dispatch(clear());
       return;
     }
-    await handleAddTask(inputText);
-    setInputText('');
+    dispatch(addNewTask(inputText));
+    dispatch(clear());
   };
 
   const handleFocus = () => {
@@ -32,7 +34,7 @@ const InputTask = () => {
         onKeyDown={(e) => {
           if (e.key === 'Enter') handleClick();
         }}
-        onChange={(e) => setInputText(e.target.value)}
+        onChange={(e) => dispatch(change(e.target.value))}
         onFocus={handleFocus}
         type="text"
         name="task"

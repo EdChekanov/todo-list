@@ -1,9 +1,20 @@
+import { useEffect } from 'react';
+import { useAppSelector } from '../../redux/hooks';
 import Task from './Task';
 import { LiaFrownOpen } from 'react-icons/lia';
-import { useToDoContext } from '../../сontext/Context';
 
 const TasksList = () => {
-  const { filteredTasks } = useToDoContext();
+  const { value: tasks, filter } = useAppSelector((store) => store.tasks);
+
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === 'active') return !task.isCompleted;
+    if (filter === 'completed') return task.isCompleted;
+    return true;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   if (!filteredTasks.length)
     return (

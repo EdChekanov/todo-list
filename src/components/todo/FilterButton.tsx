@@ -1,5 +1,6 @@
+import { setFilter } from '../../redux/actions/tasksActions';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import type { Filters } from '../../types/todo.types';
-import { useToDoContext } from '../../сontext/Context';
 
 type PropsType = {
   content: string;
@@ -7,11 +8,12 @@ type PropsType = {
 };
 
 const FilterButton = ({ content, method }: PropsType) => {
-  const { filter, setFilter } = useToDoContext();
+  const { filter } = useAppSelector((store) => store.tasks);
+  const dispatch = useAppDispatch();
 
   return (
     <button
-      onClick={() => setFilter(method)}
+      onClick={() => dispatch(setFilter(method))}
       className={filter === method ? 'active' : ''}
     >
       {content}

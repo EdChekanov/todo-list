@@ -2,11 +2,13 @@ type PropsType = {
   editText: string;
   setEditText: React.Dispatch<React.SetStateAction<string>>;
   handleClickEdit: (
-    id: string | number,
+    id: string,
     newTitle: string,
-    ref: React.RefObject<HTMLInputElement | null>,
+    ref: {
+      current: HTMLInputElement | null;
+    },
   ) => void;
-  taskId: string | number;
+  taskId: string;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   inputRef: React.RefObject<HTMLInputElement | null>;
   onCancelClick: (e: MouseEvent | TouchEvent | null) => void;

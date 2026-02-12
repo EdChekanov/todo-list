@@ -1,12 +1,16 @@
-import { useToDoContext } from '../../сontext/Context';
+import { deleteCompletedTask } from '../../redux/actions/tasksActions';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
 const Footer = () => {
-  const { tasks, handleDeleteCompleted } = useToDoContext();
+  const tasks = useAppSelector((store) => store.tasks.value);
+  const dispatch = useAppDispatch();
+
+  const handleClick = () => dispatch(deleteCompletedTask());
 
   return (
     <div className="footer">
       <p>Осталоcь дел: {tasks.filter((task) => !task.isCompleted).length}</p>
-      <button className="footer-btn" onClick={handleDeleteCompleted}>
+      <button className="footer-btn" onClick={handleClick}>
         Удалить завершенные дела
       </button>
     </div>
