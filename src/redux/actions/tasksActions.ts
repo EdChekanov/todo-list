@@ -1,42 +1,43 @@
+import { TaskActionTypes } from '../../types/actions.types';
 import type { Filters } from '../../types/todo.types';
 
-export const addNewTask = (title: string) => {
+export const addNewTask = (info: { title: string; id: string }) => {
   return {
-    type: 'ADD_NEW_TASK',
-    payload: title,
+    type: TaskActionTypes.ADD_NEW_TASK,
+    payload: info,
   } as const;
 };
 
 export const editTaskTitle = (editInfo: { id: string; newTitle: string }) => {
   return {
-    type: 'EDIT_TASK_TITLE',
+    type: TaskActionTypes.EDIT_TASK_TITLE,
     payload: editInfo,
   } as const;
 };
 
 export const switchCompleteStatus = (info: { id: string }) => {
   return {
-    type: 'SWITCH_COMPLETE_STATUS',
+    type: TaskActionTypes.SWITCH_COMPLETE_STATUS,
     payload: info,
   } as const;
 };
 
 export const deleteTask = (info: { id: string }) => {
   return {
-    type: 'DELETE_TASK',
+    type: TaskActionTypes.DELETE_TASK,
     payload: info,
   } as const;
 };
 
 export const deleteCompletedTask = () => {
   return {
-    type: 'DELETE_COMPLETED_TASKS',
+    type: TaskActionTypes.DELETE_COMPLETED_TASKS,
   } as const;
 };
 
 export const setFilter = (filter: Filters) => {
   return {
-    type: 'SET_FILTER',
+    type: TaskActionTypes.SET_FILTER,
     payload: filter,
   } as const;
 };

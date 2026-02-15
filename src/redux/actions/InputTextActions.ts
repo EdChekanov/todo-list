@@ -1,13 +1,15 @@
+import { InputTextActionTypes } from '../../types/actions.types';
+
 export const change = (text: string) => {
   return {
-    type: 'CHANGE',
+    type: InputTextActionTypes.CHANGE,
     payload: text,
   } as const;
 };
 
 export const clear = () => {
   return {
-    type: 'CLEAR',
+    type: InputTextActionTypes.CLEAR,
   } as const;
 };
 

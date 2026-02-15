@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { change, clear } from '../../redux/actions/InputTextActions';
 import { addNewTask } from '../../redux/actions/tasksActions';
+import { generateId } from '../../utils/generateId';
 
 const InputTask = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -16,7 +17,8 @@ const InputTask = () => {
       dispatch(clear());
       return;
     }
-    dispatch(addNewTask(inputText));
+    const id = generateId();
+    dispatch(addNewTask({ title: inputText, id: id }));
     dispatch(clear());
   };
 

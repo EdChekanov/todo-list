@@ -1,3 +1,4 @@
+import { TaskActionTypes } from '../../types/actions.types';
 import type { Filters, TaskType } from '../../types/todo.types';
 import type { ActionType } from '../actions/tasksActions';
 
@@ -27,19 +28,19 @@ const tasksReducer = (
   action: ActionType,
 ): InitStateType => {
   switch (action.type) {
-    case 'ADD_NEW_TASK':
+    case TaskActionTypes.ADD_NEW_TASK:
       return {
         ...store,
         value: [
           ...store.value,
           {
-            id: crypto.randomUUID(),
-            title: action.payload,
+            id: action.payload.id,
+            title: action.payload.title,
             isCompleted: false,
           },
         ],
       };
-    case 'EDIT_TASK_TITLE':
+    case TaskActionTypes.EDIT_TASK_TITLE:
       return {
         ...store,
         value: store.value.map((task) => {
@@ -49,7 +50,7 @@ const tasksReducer = (
           return task;
         }),
       };
-    case 'SWITCH_COMPLETE_STATUS':
+    case TaskActionTypes.SWITCH_COMPLETE_STATUS:
       return {
         ...store,
         value: store.value.map((task) => {
@@ -59,19 +60,19 @@ const tasksReducer = (
           return task;
         }),
       };
-    case 'DELETE_TASK':
+    case TaskActionTypes.DELETE_TASK:
       return {
         ...store,
         value: store.value.filter((task) => {
-          return !(task.id == action.payload.id);
+          return task.id !== action.payload.id;
         }),
       };
-    case 'DELETE_COMPLETED_TASKS':
+    case TaskActionTypes.DELETE_COMPLETED_TASKS:
       return {
         ...store,
         value: store.value.filter((task) => !task.isCompleted),
       };
-    case 'SET_FILTER':
+    case TaskActionTypes.SET_FILTER:
       return { ...store, filter: action.payload };
     default:
       return store;

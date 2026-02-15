@@ -1,3 +1,4 @@
+import { InputTextActionTypes } from '../../types/actions.types';
 import type { ActionType } from '../actions/InputTextActions';
 
 const initValue = {
@@ -11,9 +12,9 @@ const inputTextReducer = (
   action: ActionType,
 ): InitStateType => {
   switch (action.type) {
-    case 'CHANGE':
+    case InputTextActionTypes.CHANGE:
       return { ...store, value: action.payload };
-    case 'CLEAR':
+    case InputTextActionTypes.CLEAR:
       return { ...store, value: '' };
     default:
       return store;
