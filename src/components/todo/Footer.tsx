@@ -1,11 +1,11 @@
-import { deleteCompletedTask } from '../../redux/actions/tasksActions';
+import { deleteCompletedTasks } from '../../redux/api/tasksApi';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
 const Footer = () => {
   const tasks = useAppSelector((store) => store.tasks.value);
   const dispatch = useAppDispatch();
 
-  const handleClick = () => dispatch(deleteCompletedTask());
+  const handleClick = () => dispatch(deleteCompletedTasks());
 
   return (
     <div className="footer">

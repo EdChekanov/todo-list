@@ -4,7 +4,11 @@ import Task from './Task';
 import { LiaFrownOpen } from 'react-icons/lia';
 
 const TasksList = () => {
-  const { value: tasks, filter } = useAppSelector((store) => store.tasks);
+  const {
+    value: tasks,
+    filter,
+    loading,
+  } = useAppSelector((store) => store.tasks);
 
   const filteredTasks = tasks.filter((task) => {
     if (filter === 'active') return !task.isCompleted;
@@ -27,6 +31,11 @@ const TasksList = () => {
 
   return (
     <ul className="task-list">
+      {loading && (
+        <li>
+          <b>Загрузка...</b>
+        </li>
+      )}
       {filteredTasks.map((task) => (
         <span key={task.id}>
           <Task task={task} />

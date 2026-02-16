@@ -7,7 +7,7 @@ import {
   deleteTask,
   editTaskTitle,
   switchCompleteStatus,
-} from '../../redux/actions/tasksActions';
+} from '../../redux/api/tasksApi';
 
 type PropsType = {
   task: TaskType;
@@ -39,9 +39,9 @@ const Task = ({ task }: PropsType) => {
   };
 
   const handleClickComplete = (id: string) =>
-    dispatch(switchCompleteStatus({ id }));
+    dispatch(switchCompleteStatus(id));
 
-  const handleClickDelete = (id: string) => dispatch(deleteTask({ id }));
+  const handleClickDelete = (id: string) => dispatch(deleteTask(id));
 
   const onCancelClick = (e: MouseEvent | TouchEvent | null) => {
     if (e?.target === document.querySelector('.edit-btn')) return;

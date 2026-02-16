@@ -1,4 +1,4 @@
-import { setFilter } from '../../redux/actions/tasksActions';
+import { setFilter } from '../../redux/slices/tasksSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import type { Filters } from '../../types/todo.types';
 
